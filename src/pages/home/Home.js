@@ -1,6 +1,6 @@
-import Main from '../../Main/Main';
-import Posts from '../../posts/Posts';
-import SideBar from '../../SideBar/SideBar';
+import Main from '../../components/Main/Main';
+import Posts from '../../components/posts/Posts';
+import SideBar from '../../components/SideBar/SideBar';
 import './Home.css';
 
 const Home = () => {
