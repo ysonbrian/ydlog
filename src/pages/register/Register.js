@@ -1,5 +1,5 @@
 import './Register.css';
-
+import { Link } from 'react-router-dom';
 const Login = () => {
   return (
     <div className="register">
@@ -25,7 +25,11 @@ const Login = () => {
         />
         <button className="registerButton">가입하기</button>
       </form>
-      <button className="registerLoginButton">로그인</button>
+      <button className="registerLoginButton">
+        <Link className="link" to="/login">
+          로그인
+        </Link>
+      </button>
     </div>
   );
 };

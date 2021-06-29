@@ -2,12 +2,13 @@
   margin-top: 60px;
 }
 
+/* color: #444 */
 .mainTitles {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: 'Lora', serif;
-  color: #444;
+  color: white;
 }
 
 .mainTitleSm {
