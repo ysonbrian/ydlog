@@ -1,16 +1,27 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import './SinglePost.css';
+import axios from 'axios';
 
 const SinglePost = () => {
+  const location = useLocation();
+  const path = location.pathname.split('/')[2];
+  const [post, setPost] = useState({});
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get('/posts/' + path);
+      setPost(res.data);
+    };
+    getPost();
+  }, [path]);
   return (
     <div class="singlePost">
       <div className="singlePostWrapper">
-        <img
-          src="https://images.unsplash.com/photo-1562494400-5b335a653209?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHdlYXRoZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-          alt=""
-          className="singlePostImg"
-        />
+        {post.photo && (
+          <img src={post.photo} alt="" className="singlePostImg" />
+        )}
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor sit amet
+          {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon far fa-edit"></i>
             <i className="singlePostIcon far fa-trash-alt"></i>
@@ -18,29 +29,13 @@ const SinglePost = () => {
         </h1>
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author: <b>Brian</b>
+            Author: <b>{post.username}</b>
           </span>
-          <span className="singlePostDate">1 hour ago</span>
+          <span className="singlePostDate">
+            {new Date(post.createdAt).toDateString()}
+          </span>
         </div>
-        <p className="singlePostDesc">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea excepturi
-          minus optio nulla voluptatem voluptate, totam ducimus maxime doloribus
-          praesentium dolorum quibusdam nisi soluta, dolore ratione natus,
-          repudiandae nesciunt fugiat. Iure architecto in dolores veritatis
-          alias eaque aperiam nisi praesentium maiores. Voluptate, corporis ad
-          perspiciatis blanditiis ullam non pariatur nobis sint sit nostrum
-          illum, fugit ipsam quisquam magnam, laudantium suscipit? A, modi
-          deleniti? Non nulla dolore optio numquam, minima, molestiae veritatis
-          quos quas vero maiores facilis expedita eum adipisci eveniet neque
-          dolorum inventore illo at natus vitae iusto! A, suscipit. Dolorum
-          porro quibusdam reiciendis voluptas eius rerum eligendi natus nihil
-          eum minus, atque dolorem, rem neque voluptatum? Eveniet laborum dicta
-          optio unde consequuntur voluptatibus sed sapiente. Quos eius ipsa
-          eaque. Aut non commodi esse ipsam illo, sit temporibus voluptatem
-          laudantium ea ipsa animi, facilis dolores deleniti quos cupiditate
-          eveniet dolor exercitationem eligendi minus autem, deserunt minima!
-          Eaque obcaecati dignissimos est.
-        </p>
+        <p className="singlePostDesc">{post.desc}</p>
       </div>
     </div>
   );
