@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 export const Context = createContext(INITIAL_STATE);
 
 export const ContextProvider = ({ children }) => {
+  // eslint-disable-next-line no-unused-vars
   const [state, dispatch] = useReducer(Reducer, INITIAL_STATE);
 
   return (
